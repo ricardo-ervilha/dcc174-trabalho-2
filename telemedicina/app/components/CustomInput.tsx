@@ -1,17 +1,20 @@
 // Input.js
-import React from 'react';
+import React, { useState } from 'react';
 import { TextInput, View, StyleSheet } from 'react-native';
 
 const CustomInput = ({ value, onChangeText, placeholder, style, secureTextEntry, keyboardType }) => {
+  const [isFocused, setIsFocused] = useState(false);
   return (
     <View style={[styles.container, style]}>
       <TextInput
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
-        style={styles.input}
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        style={[styles.input, isFocused && styles.inputFocused]}
       />
     </View>
   );
@@ -27,8 +30,12 @@ const styles = StyleSheet.create({
         borderWidth: 1, 
         borderRadius: 4,
         padding: 10,
-        backgroundColor: '#fff'
-    }
+        backgroundColor: '#fff',
+        fontFamily: 'Poppins_500Medium'
+    },
+    inputFocused: {
+      borderColor: "transparent",
+    },
 });
 
 export default CustomInput;

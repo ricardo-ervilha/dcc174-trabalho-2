@@ -6,7 +6,7 @@ export default class CustomButton extends React.Component {
       return (
         <View style={styles.container}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Press Here</Text>
+            <Text onPress={this.props.onPress} style={styles.text}>{this.props.text}</Text>
           </TouchableOpacity>
         </View>
       );
@@ -17,17 +17,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 10,
     marginBottom: 5
   },
   button: {
     alignItems: 'center',
     backgroundColor: '#5996D8',
     padding: 10,
-    borderRadius: 8,
+    borderRadius: 6,
   },
   text:{
     color: "#FFFFFF",
+    fontFamily: 'Poppins_800ExtraBold',
+    fontSize: 16
   },
   countContainer: {
     alignItems: 'center',

@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet, TextInput, ActivityIndicator, Button, KeyboardAvoidingView } from 'react-native'
+import { View, Image, Text, StyleSheet, TextInput, ActivityIndicator, Button, KeyboardAvoidingView } from 'react-native'
 import React, { useState } from 'react'
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 import CustomButton from '../components/CustomButton';
+import CustomInput from '../components/CustomInput';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -40,17 +41,22 @@ const Login = () => {
         }
     }
 
+    
     return (
         <View style={styles.container}>
+            <View style={styles.image}>
+                <Image source={require('../../assets/logo_salus.png')} style={{width: 300, height: 300}}/>
+            </View>
+            
             <KeyboardAvoidingView behavior='padding'>
-                <TextInput value={email} style={styles.input} placeholder='Email' autoCapitalize='none' onChangeText={(text) => setEmail(text)}></TextInput>
-                <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder='Password' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></TextInput>
+                <CustomInput value={email} placeholder='Email' autoCapitalize='none' onChangeText={(text) => setEmail(text)}></CustomInput>
+                
+                <CustomInput secureTextEntry={true} value={password} placeholder='Password' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></CustomInput>
 
                 {loading ? <ActivityIndicator size="large" color="#0000ff"/> : 
                 <>
-                    <CustomButton/>
-                    <Button title='Login' onPress={signIn}/>
-                    <Button title='SignUp' onPress={signUp}/>
+                    <CustomButton text="Entrar" onPress={signIn}/>
+                    <CustomButton text="Cadastrar-se" onPress={signUp}/>
                 </>
                 }
             </KeyboardAvoidingView>
@@ -61,6 +67,10 @@ const Login = () => {
 export default Login
 
 const styles = StyleSheet.create({
+    image: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container: {
         marginHorizontal: 20,
         flex: 1, 
