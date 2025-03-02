@@ -44,6 +44,7 @@ function InsideLayout(){
       screenOptions={{
         headerTitleAlign: 'center',
         headerTintColor: '#ffffff',
+        contentStyle: {backgroundColor: '#ffffff'},
         headerStyle: {backgroundColor: '#2B44BD'},
         headerTitleStyle: {
           fontFamily: 'Poppins_500Medium', // Defina a fonte que deseja
