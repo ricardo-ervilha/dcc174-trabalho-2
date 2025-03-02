@@ -23,10 +23,11 @@ const List = ({ navigation }: RouterProps) => {
       </View>
 
       
-      <View style={{flex: 1, justifyContent: 'center', alignItems:'center', marginTop: 48}}>
-        <CustomButtonArea imagepath={require('../../assets/communication.png')} text="Acessar Dúvidas" />
-        {/* <Button onPress={() => navigation.navigate('Details')} title="Open Details"/>
-        <Button onPress={() => FIREBASE_AUTH.signOut()} title="Logout"/> */}
+      <View style={{flex: 1, flexDirection:'row', justifyContent: 'center', alignItems:'center', gap:23, padding:48, marginTop: 48}}>
+        <CustomButtonArea imagepath={require('../../assets/communication.png')} text="Acessar Dúvidas"/>
+        <CustomButtonArea imagepath={require('../../assets/report.png')} text="Gerar relatório de Estagiário" />                    
+        {/* <Button onPress={() => navigation.navigate('Details')} title="Open Details"/> */}
+        <Button onPress={() => FIREBASE_AUTH.signOut()} title="Logout"/>
       </View>
     </View>
   )
