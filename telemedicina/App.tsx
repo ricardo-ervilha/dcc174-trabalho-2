@@ -8,6 +8,8 @@ import Details from './app/screens/Details';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
+import ConfirmExitModal from "./app/components/ConfirmationModal"; // Ajuste o caminho conforme necessário
+import { BackHandler } from 'react-native';
 
 import {
   useFonts,
@@ -39,7 +41,16 @@ const Stack = createNativeStackNavigator();
 const InsideStack = createNativeStackNavigator();
 
 function InsideLayout(){
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleConfirmExit = () => {
+    setModalVisible(false);
+    BackHandler.exitApp();
+    FIREBASE_AUTH.signOut();
+  };
+
   return (
+    <>
     <InsideStack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
@@ -71,7 +82,7 @@ function InsideLayout(){
           //   color="#FFFFFF"
           // />
           <View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
               <Image source={require('./assets/x.png')} style={{ width: 20, height: 20, marginRight: 10 }} />
             </TouchableOpacity>
           </View>
@@ -81,6 +92,14 @@ function InsideLayout(){
       <InsideStack.Screen name="HOME" component={List}/>
       <InsideStack.Screen name="Details" component={Details}/>
     </InsideStack.Navigator>
+    <ConfirmExitModal
+        textModal="Tem certeza que deseja sair do aplicativo?"
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onConfirm={handleConfirmExit}
+      />
+    </>
+    
   )
 }
 
