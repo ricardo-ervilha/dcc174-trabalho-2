@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Searchbar } from 'react-native-paper';
 import CustomButton from "../../components/CustomButton";
+import { NavigationProp } from '@react-navigation/native'
 
 const questions = [
   {
@@ -139,7 +140,12 @@ const iconMap = {
   'patient_female.png': require('../../../assets/patient_female.png'),
 };
 
-const ListaDuvidas = () => {
+
+interface RouterProps {
+  navigation: NavigationProp<any, any>;
+}
+
+const ListaDuvidas = ({ navigation }: RouterProps) => {
   const [search, setSearch] = useState("");
 
   const filteredQuestions = questions.filter((q) =>
@@ -155,8 +161,7 @@ const ListaDuvidas = () => {
         onChangeText={setSearch}
         value={search}
       />
-
-      {/* Lista de dúvidas */}
+      
       <FlatList
         data={filteredQuestions}
         keyExtractor={(item) => item.id}
@@ -176,13 +181,19 @@ const ListaDuvidas = () => {
                 </View>
                 <View style={{marginTop:20}}>
                   <TouchableOpacity>
-                    <CustomButton text='Responder' onPress={()=>{}} />
+                  <CustomButton text="Responder" onPress={() => {
+                        navigation.navigate('Responder Dúvida', 
+                          {questionData: item})
+                     }}
+                    />
+                    {/* <Button onPress={() => navigation.navigate('Details')} title="Open Details"/> */}
                   </TouchableOpacity>
                 </View>
               </View>
           );
         }}
       />
+      
     </View>
   );
 };
@@ -237,6 +248,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontWeight: "bold",
+  },
+  buttonContainer: {
+    alignItems: 'flex-end',  // Alinha o botão à direita
+    marginTop: 20,  // Espaço entre os campos e o botão
   },
 });
 

@@ -35,6 +35,7 @@ import {
 import AppLoading from 'expo-app-loading';
 import React from 'react';
 import ListaDuvidas from './app/screens/Duvidas/ListaDuvidas';
+import DetalhesDuvida from './app/screens/Duvidas/DetalhesDuvida';
 
 
 const Stack = createNativeStackNavigator();
@@ -93,6 +94,7 @@ function InsideLayout(){
       <InsideStack.Screen name="HOME" component={List}/>
       <InsideStack.Screen name="Details" component={Details}/>
       <InsideStack.Screen name="Dúvidas" component={ListaDuvidas}/>
+      <InsideStack.Screen name="Responder Dúvida" component={DetalhesDuvida}/>
     </InsideStack.Navigator>
     <ConfirmExitModal
         textModal="Tem certeza que deseja sair do aplicativo?"
