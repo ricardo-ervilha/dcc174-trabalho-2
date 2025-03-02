@@ -34,6 +34,7 @@ import {
 } from '@expo-google-fonts/poppins';
 import AppLoading from 'expo-app-loading';
 import React from 'react';
+import ListaDuvidas from './app/screens/Duvidas/ListaDuvidas';
 
 
 const Stack = createNativeStackNavigator();
@@ -91,6 +92,7 @@ function InsideLayout(){
     >
       <InsideStack.Screen name="HOME" component={List}/>
       <InsideStack.Screen name="Details" component={Details}/>
+      <InsideStack.Screen name="Dúvidas" component={ListaDuvidas}/>
     </InsideStack.Navigator>
     <ConfirmExitModal
         textModal="Tem certeza que deseja sair do aplicativo?"

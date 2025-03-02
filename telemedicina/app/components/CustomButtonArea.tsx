@@ -1,13 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 
-const CustomButtonArea = ({ imagepath,  text }) => {
+const CustomButtonArea = ({ imagepath, text, onPress }) => {
   return (
-    <View style={styles.container}>
-        <Image source={imagepath} style={{ width: 60, height: 60 }} />
-        <Text style={styles.text}>{text}</Text>    
-    </View>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Image source={imagepath} style={{ width: 60, height: 60 }} />
+      <Text style={styles.text}>{text}</Text>    
+    </TouchableOpacity>
   );
 };
 
@@ -21,13 +20,13 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     borderColor: 'black',
     borderWidth: 1,
-    shadowColor: '#000', // Cor da sombra
-    shadowOffset: { width: 0, height: 4 }, // Deslocamento da sombra
-    shadowOpacity: 0.5, // Opacidade da sombra
-    shadowRadius: 6, // Raio de difusão da sombra
-    elevation: 10, // Propriedade para Android (simula a sombra)
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 6,
+    elevation: 10,
   },
-  text:{
+  text: {
     fontFamily: 'Poppins_500Medium',
     fontSize: 16,
     marginTop: 8,
