@@ -1,13 +1,15 @@
 import { createStaticNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import Login from './app/screens/Login';
 import List from './app/screens/List';
 import Details from './app/screens/Details';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
+import ConfirmExitModal from "./app/components/ConfirmationModal"; // Ajuste o caminho conforme necessário
+import { BackHandler } from 'react-native';
 
 import {
   useFonts,
@@ -32,6 +34,8 @@ import {
 } from '@expo-google-fonts/poppins';
 import AppLoading from 'expo-app-loading';
 import React from 'react';
+import ListaDuvidas from './app/screens/Duvidas/ListaDuvidas';
+import DetalhesDuvida from './app/screens/Duvidas/DetalhesDuvida';
 
 
 const Stack = createNativeStackNavigator();
@@ -39,11 +43,67 @@ const Stack = createNativeStackNavigator();
 const InsideStack = createNativeStackNavigator();
 
 function InsideLayout(){
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleConfirmExit = () => {
+    setModalVisible(false);
+    BackHandler.exitApp();
+    FIREBASE_AUTH.signOut();
+  };
+
   return (
-    <InsideStack.Navigator>
-      <InsideStack.Screen name="My todos" component={List}/>
+    <>
+    <InsideStack.Navigator
+      screenOptions={{
+        headerTitleAlign: 'center',
+        headerTintColor: '#ffffff',
+        contentStyle: {backgroundColor: '#ffffff'},
+        headerStyle: {backgroundColor: '#2B44BD'},
+        headerTitleStyle: {
+          fontFamily: 'Poppins_500Medium', // Defina a fonte que deseja
+          fontSize: 20, // Tamanho da fonte
+          fontWeight: 'bold', // Peso da fonte
+          color: '#FFFFFF', // Cor do texto
+        },
+        headerLeft: () => (
+          // <Button
+          //   onPress={() => console.log('Botão Esquerdo Pressionado')}
+          //   title="Esquerdo"
+          //   color="#FFFFFF"
+          // />
+          <View>
+            <TouchableOpacity>
+              <Image source={require('./assets/menu.png')} style={{ width: 25, height: 25, marginLeft: 5 }} />
+            </TouchableOpacity>
+          </View>
+        ),
+        headerRight: () => (
+          // <Button
+          //   onPress={() => console.log('Botão Direito Pressionado')}
+          //   title="Direito"
+          //   color="#FFFFFF"
+          // />
+          <View>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <Image source={require('./assets/x.png')} style={{ width: 20, height: 20, marginRight: 10 }} />
+            </TouchableOpacity>
+          </View>
+        ),
+      }}
+    >
+      <InsideStack.Screen name="HOME" component={List}/>
       <InsideStack.Screen name="Details" component={Details}/>
+      <InsideStack.Screen name="Dúvidas" component={ListaDuvidas}/>
+      <InsideStack.Screen name="Responder Dúvida" component={DetalhesDuvida}/>
     </InsideStack.Navigator>
+    <ConfirmExitModal
+        textModal="Tem certeza que deseja sair do aplicativo?"
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onConfirm={handleConfirmExit}
+      />
+    </>
+    
   )
 }
 

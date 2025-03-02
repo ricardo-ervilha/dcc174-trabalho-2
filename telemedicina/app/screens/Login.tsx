@@ -1,5 +1,5 @@
-import { View, Image, Text, StyleSheet, TextInput, ActivityIndicator, Button, KeyboardAvoidingView } from 'react-native'
-import React, { useState } from 'react'
+import { View, Image, Text, StyleSheet, ActivityIndicator, KeyboardAvoidingView, BackHandler, TouchableOpacity  } from 'react-native';
+import React, { useState } from 'react';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
@@ -10,78 +10,105 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const auth = FIREBASE_AUTH;
 
+    const validateInputs = () => {
+        if (!email || !password) {
+            setErrorMessage('Preencha ambos os campos!');
+            return false;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            setErrorMessage('E-mail inválido!');
+            return false;
+        }
+        setErrorMessage('');
+        return true;
+    };
+
     const signIn = async () => {
+        if (!validateInputs()) return;
         setLoading(true);
 
-        try{
+        try {
             const response = await signInWithEmailAndPassword(auth, email, password);
             console.log(response);
-        } catch(error : any){
-            console.log(error);
-            alert('Sign in failed ' + error.message);
+        } catch (error) {
+            setErrorMessage('Falha no login. Informe e-mail e senha corretos.');
         } finally {
             setLoading(false);
         }
-    }
+    };
 
     const signUp = async () => {
+        if (!validateInputs()) return;
         setLoading(true);
 
-        try{
+        try {
             const response = await createUserWithEmailAndPassword(auth, email, password);
             console.log(response);
-            alert("Check your emails!");
-        } catch(error: any){
+            alert('Cadastro realizado com sucesso!');
+        } catch (error) {
             console.log(error);
-            alert('Sign up failed ' + error.message);
+            setErrorMessage('Falha no cadastro: ' + error.message);
         } finally {
             setLoading(false);
         }
-    }
+    };
 
-    
     return (
         <View style={styles.container}>
-            <View style={styles.image}>
-                <Image source={require('../../assets/logo_salus.png')} style={{width: 300, height: 300}}/>
+            
+            <View style={styles.x}>
+                <TouchableOpacity onPress={() => BackHandler.exitApp()}>
+                    <Image source={require('../../assets/x.png')} style={{ width: 25, height: 25 }} />
+                </TouchableOpacity>
             </View>
             
-            <KeyboardAvoidingView behavior='padding'>
-                <CustomInput value={email} placeholder='Email' autoCapitalize='none' onChangeText={(text) => setEmail(text)}></CustomInput>
-                
-                <CustomInput secureTextEntry={true} value={password} placeholder='Password' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></CustomInput>
+            <View style={styles.image}>
+                <Image source={require('../../assets/logo_salus.png')} style={{ width: 300, height: 300 }} />
+            </View>
 
-                {loading ? <ActivityIndicator size="large" color="#0000ff"/> : 
-                <>
-                    <CustomButton text="Entrar" onPress={signIn}/>
-                    <CustomButton text="Cadastrar-se" onPress={signUp}/>
-                </>
-                }
+            <KeyboardAvoidingView behavior='padding'>
+                <CustomInput value={email} placeholder='E-mail' autoCapitalize='none' onChangeText={setEmail} />
+                <CustomInput secureTextEntry value={password} placeholder='Senha' autoCapitalize='none' onChangeText={setPassword} />
+
+                {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+
+                {loading ? <ActivityIndicator size='large' color='#0000ff' /> : (
+                    <>
+                        <CustomButton text='Entrar' onPress={signIn} />
+                        <CustomButton text='Cadastrar-se' onPress={signUp} />
+                    </>
+                )}
             </KeyboardAvoidingView>
         </View>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;
 
 const styles = StyleSheet.create({
+    x:{
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        zIndex: 10,
+        marginTop: 10,
+    },
     image: {
         justifyContent: 'center',
         alignItems: 'center',
     },
     container: {
         marginHorizontal: 20,
-        flex: 1, 
-        justifyContent: 'center'
+        flex: 1,
+        justifyContent: 'center',
     },
-    input: {
-        marginVertical: 4,
-        height: 50,
-        borderWidth: 1, 
-        borderRadius: 4,
-        padding: 10,
-        backgroundColor: '#fff'
-    }
-})
+    error: {
+        fontFamily: 'Poppins_500Medium',
+        marginBottom: 10,
+        marginLeft: 10,
+        color: 'red',
+    },
+});
