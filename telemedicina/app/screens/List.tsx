@@ -3,6 +3,8 @@ import React from 'react'
 import { NavigationProp, Router } from '@react-navigation/native'
 import { FIREBASE_AUTH } from '../../FirebaseConfig'
 
+import TopMenu from '../components/topmenu'
+
 interface RouterProps {
   navigation: NavigationProp<any, any>;
 }

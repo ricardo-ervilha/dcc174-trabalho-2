@@ -1,7 +1,7 @@
 import { createStaticNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import Login from './app/screens/Login';
 import List from './app/screens/List';
 import Details from './app/screens/Details';
@@ -40,8 +40,44 @@ const InsideStack = createNativeStackNavigator();
 
 function InsideLayout(){
   return (
-    <InsideStack.Navigator>
-      <InsideStack.Screen name="My todos" component={List}/>
+    <InsideStack.Navigator
+      screenOptions={{
+        headerTitleAlign: 'center',
+        headerTintColor: '#ffffff',
+        headerStyle: {backgroundColor: '#2B44BD'},
+        headerTitleStyle: {
+          fontFamily: 'Poppins_500Medium', // Defina a fonte que deseja
+          fontSize: 20, // Tamanho da fonte
+          fontWeight: 'bold', // Peso da fonte
+          color: '#FFFFFF', // Cor do texto
+        },
+        headerLeft: () => (
+          // <Button
+          //   onPress={() => console.log('Botão Esquerdo Pressionado')}
+          //   title="Esquerdo"
+          //   color="#FFFFFF"
+          // />
+          <View>
+            <TouchableOpacity>
+              <Image source={require('./assets/menu.png')} style={{ width: 25, height: 25, marginLeft: 5 }} />
+            </TouchableOpacity>
+          </View>
+        ),
+        headerRight: () => (
+          // <Button
+          //   onPress={() => console.log('Botão Direito Pressionado')}
+          //   title="Direito"
+          //   color="#FFFFFF"
+          // />
+          <View>
+            <TouchableOpacity>
+              <Image source={require('./assets/x.png')} style={{ width: 20, height: 20, marginRight: 10 }} />
+            </TouchableOpacity>
+          </View>
+        ),
+      }}
+    >
+      <InsideStack.Screen name="HOME" component={List}/>
       <InsideStack.Screen name="Details" component={Details}/>
     </InsideStack.Navigator>
   )
