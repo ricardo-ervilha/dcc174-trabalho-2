@@ -87,7 +87,7 @@ function InsideLayout(){
           })}
 >
 
-      <InsideStack.Screen name="HOME" component={List} />
+      <InsideStack.Screen name="Home" component={List} />
       <InsideStack.Screen name="Details" component={Details}/>
       <InsideStack.Screen name="Duvidas" component={ListaDuvidas}  options={{ title: 'Dúvidas' }}/>
       <InsideStack.Screen name="ResponderDuvida" component={DetalhesDuvida} options={{ title: 'Responder Dúvida' }}/>

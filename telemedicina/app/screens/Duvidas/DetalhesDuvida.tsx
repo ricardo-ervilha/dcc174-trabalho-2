@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import CustomButton from "../../components/CustomButton";
 import CustomInput from "../../components/CustomInput";
 
+import LargeTextInput from "../../components/TextArea";
+
 const DetalhesDuvida = ({ route, navigation }) => {
   // Desestruturando os dados passados pela navegação
   const { questionData } = route.params;
@@ -25,7 +27,7 @@ const DetalhesDuvida = ({ route, navigation }) => {
 
       {/* Campo de resposta */}
       <View>
-      <CustomInput
+      <LargeTextInput
         value={resposta}
         onChangeText={setResposta}
         placeholder="Aqui você pode escrever sua resposta..."
@@ -60,6 +62,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: "95%",
     alignSelf: "center",
+    fontFamily: 'Poppins_500Medium',
   },
   header: {
     flexDirection: "row",
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
     borderColor: "#2B44BD",
   },
   questionText: {
-    fontSize: 14,
+    fontSize: 20,
     color: "#333",
   },
   responseBox: {
