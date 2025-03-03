@@ -36,6 +36,7 @@ import AppLoading from 'expo-app-loading';
 import React from 'react';
 import ListaDuvidas from './app/screens/Duvidas/ListaDuvidas';
 import DetalhesDuvida from './app/screens/Duvidas/DetalhesDuvida';
+import FlashMessage from 'react-native-flash-message';
 
 
 const Stack = createNativeStackNavigator();
@@ -97,6 +98,7 @@ function InsideLayout(){
         onClose={() => setModalVisible(false)}
         onConfirm={handleConfirmExit}
       />
+      <FlashMessage position="top" />
     </>
     
   )
