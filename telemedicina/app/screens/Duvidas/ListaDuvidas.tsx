@@ -182,7 +182,7 @@ const ListaDuvidas = ({ navigation }: RouterProps) => {
                 <View style={{marginTop:20}}>
                   <TouchableOpacity>
                   <CustomButton text="Responder" onPress={() => {
-                        navigation.navigate('Responder Dúvida', 
+                        navigation.navigate('ResponderDuvida', 
                           {questionData: item})
                      }}
                     />

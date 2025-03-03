@@ -54,47 +54,42 @@ function InsideLayout(){
   return (
     <>
     <InsideStack.Navigator
-      screenOptions={{
-        headerTitleAlign: 'center',
-        headerTintColor: '#ffffff',
-        contentStyle: {backgroundColor: '#ffffff'},
-        headerStyle: {backgroundColor: '#2B44BD'},
-        headerTitleStyle: {
-          fontFamily: 'Poppins_500Medium', // Defina a fonte que deseja
-          fontSize: 20, // Tamanho da fonte
-          fontWeight: 'bold', // Peso da fonte
-          color: '#FFFFFF', // Cor do texto
-        },
-        headerLeft: () => (
-          // <Button
-          //   onPress={() => console.log('Botão Esquerdo Pressionado')}
-          //   title="Esquerdo"
-          //   color="#FFFFFF"
-          // />
-          <View>
-            <TouchableOpacity>
-              <Image source={require('./assets/menu.png')} style={{ width: 25, height: 25, marginLeft: 5 }} />
-            </TouchableOpacity>
-          </View>
-        ),
-        headerRight: () => (
-          // <Button
-          //   onPress={() => console.log('Botão Direito Pressionado')}
-          //   title="Direito"
-          //   color="#FFFFFF"
-          // />
-          <View>
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
-              <Image source={require('./assets/x.png')} style={{ width: 20, height: 20, marginRight: 10 }} />
-            </TouchableOpacity>
-          </View>
-        ),
-      }}
-    >
-      <InsideStack.Screen name="HOME" component={List}/>
+          screenOptions={({ navigation, route }) => ({
+            headerTitleAlign: 'center',
+            headerTintColor: '#ffffff',
+            contentStyle: { backgroundColor: '#ffffff' },
+            headerStyle: { backgroundColor: '#2B44BD' },
+            headerTitleStyle: {
+              fontFamily: 'Poppins_500Medium',
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: '#FFFFFF',
+            },
+            headerLeft: () => (
+              route.name === 'HOME' ? (
+                <TouchableOpacity>
+                  <Image source={require('./assets/menu.png')} style={{ width: 25, height: 25, marginLeft: 5 }} />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                  <Image source={require('./assets/back.png')} style={{ width: 25, height: 25, marginLeft: 5 }} />
+                </TouchableOpacity>
+              )
+            ),
+            headerRight: () => (
+              route.name !== 'HOME' ? (
+                <TouchableOpacity onPress={() => navigation.navigate('HOME')}>
+                  <Image source={require('./assets/x.png')} style={{ width: 20, height: 20, marginRight: 10 }} />
+                </TouchableOpacity>
+              ):undefined
+            ),
+          })}
+>
+
+      <InsideStack.Screen name="HOME" component={List} />
       <InsideStack.Screen name="Details" component={Details}/>
-      <InsideStack.Screen name="Dúvidas" component={ListaDuvidas}/>
-      <InsideStack.Screen name="Responder Dúvida" component={DetalhesDuvida}/>
+      <InsideStack.Screen name="Duvidas" component={ListaDuvidas}  options={{ title: 'Dúvidas' }}/>
+      <InsideStack.Screen name="ResponderDuvida" component={DetalhesDuvida} options={{ title: 'Responder Dúvida' }}/>
     </InsideStack.Navigator>
     <ConfirmExitModal
         textModal="Tem certeza que deseja sair do aplicativo?"
@@ -148,7 +143,9 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName='Login'>
-          {user ? (<Stack.Screen name='Login' component={InsideLayout} options={{ headerShown: false }}/>) : (<Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>)}
+          {user ? 
+          (<Stack.Screen name='Login' component={InsideLayout} options={{ headerShown: false }}/>) : 
+          (<Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>)}
         </Stack.Navigator>
       </NavigationContainer>
     );

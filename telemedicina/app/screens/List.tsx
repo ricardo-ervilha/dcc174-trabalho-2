@@ -20,9 +20,9 @@ const List = ({ navigation }: RouterProps) => {
       </View>
       
       <View style={styles.buttonContainer}>
-        <CustomButtonArea onPress={() => navigation.navigate('Dúvidas')} imagepath={require('../../assets/communication.png')} text="Acessar Dúvidas"/>
-        <CustomButtonArea onPress={() => navigation.navigate('Dúvidas')} imagepath={require('../../assets/report.png')} text="Relatório de Estagiário" />                    
-        {/* <Button onPress={() => navigation.navigate('Dúvidas')} title="Open Details"/> */}
+        <CustomButtonArea onPress={() => navigation.navigate('Duvidas')} imagepath={require('../../assets/communication.png')} text="Acessar Dúvidas"/>
+        <CustomButtonArea onPress={() => navigation.navigate('Duvidas')} imagepath={require('../../assets/report.png')} text="Relatório de Estagiário" />                    
+        {/* <Button onPress={() => navigation.navigate('Duvidas')} title="Open Details"/> */}
         {/* <Button onPress={() => navigation.navigate('Details')} title="Open Details"/> */}
       </View>
     </ScrollView>
