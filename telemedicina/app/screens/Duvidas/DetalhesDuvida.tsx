@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import CustomButton from "../../components/CustomButton";
 import CustomInput from "../../components/CustomInput";
@@ -6,6 +6,7 @@ import CustomInput from "../../components/CustomInput";
 const DetalhesDuvida = ({ route, navigation }) => {
   // Desestruturando os dados passados pela navegação
   const { questionData } = route.params;
+  const [resposta, setResposta] = useState("");
 
   return (
     <View style={styles.container}>
@@ -14,7 +15,6 @@ const DetalhesDuvida = ({ route, navigation }) => {
         <Image source={require("../../../assets/patient_male.png")} style={styles.icon} />
         <View style={styles.headerText}>
           <Text style={styles.title}>{questionData.title}</Text>
-          {/* <Text style={styles.description}>{questionData.description}</Text> */}
         </View>
       </View>
 
@@ -25,19 +25,24 @@ const DetalhesDuvida = ({ route, navigation }) => {
 
       {/* Campo de resposta */}
       <View>
-        <CustomInput style={styles.responseText}>Aqui você pode escrever sua resposta...</CustomInput>
+      <CustomInput
+        value={resposta}
+        onChangeText={setResposta}
+        placeholder="Aqui você pode escrever sua resposta..."
+        style={styles.responseText}
+      />
       </View>
 
       {/* Botões "Voltar" e "Responder" lado a lado */}
       <View style={styles.buttonContainer}>
         <CustomButton
-          text="Voltar" 
+          text={<Text>Voltar</Text>} // Wrap the text inside a <Text> component
           backgroundColor="#FF6347"
           onPress={() => navigation.goBack()} 
         />
-        <View style={styles.buttonSpacing} /> {/* Espaçamento entre os botões */}
+        <View style={styles.buttonSpacing} />
         <CustomButton
-          text="Responder" 
+          text={<Text>Responder</Text>} // Wrap the text inside a <Text> component
           onPress={() => alert("Respondido!")} 
         />
       </View>
