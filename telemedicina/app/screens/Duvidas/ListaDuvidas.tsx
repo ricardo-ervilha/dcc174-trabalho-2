@@ -238,6 +238,7 @@ const styles = StyleSheet.create({
   author: {
     fontSize: 12,
     color: "#808080",
+    fontWeight: "bold"
   },
   button: {
     backgroundColor: "#2B44BD",

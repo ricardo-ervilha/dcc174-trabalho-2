@@ -1,19 +1,16 @@
-import { View, Text, Button, Image, StyleSheet } from 'react-native'
-import React from 'react'
-import { NavigationProp, Router } from '@react-navigation/native'
-import { FIREBASE_AUTH } from '../../FirebaseConfig'
-import CustomButtonArea from '../components/CustomButtonArea'
-
+import { View, Text, Button, Image, StyleSheet, ScrollView } from 'react-native';
+import React from 'react';
+import { NavigationProp } from '@react-navigation/native';
+import { FIREBASE_AUTH } from '../../FirebaseConfig';
+import CustomButtonArea from '../components/CustomButtonArea';
 
 interface RouterProps {
   navigation: NavigationProp<any, any>;
 }
 
 const List = ({ navigation }: RouterProps) => {
-  
   return (
-    <View>
-      
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.profile}>
         <Image source={require('../../assets/doctor.png')} style={styles.image} />
         <View style={styles.textContainer}>
@@ -21,24 +18,28 @@ const List = ({ navigation }: RouterProps) => {
           <Text style={styles.welcomeText}>Seja Bem-Vindo(a).</Text>
         </View>
       </View>
-
       
-      <View style={{flex: 1, flexDirection:'row', justifyContent: 'center', alignItems:'center', gap:23, padding:48, marginTop: 48}}>
+      <View style={styles.buttonContainer}>
         <CustomButtonArea onPress={() => navigation.navigate('Dúvidas')} imagepath={require('../../assets/communication.png')} text="Acessar Dúvidas"/>
         <CustomButtonArea onPress={() => navigation.navigate('Dúvidas')} imagepath={require('../../assets/report.png')} text="Relatório de Estagiário" />                    
         {/* <Button onPress={() => navigation.navigate('Dúvidas')} title="Open Details"/> */}
         {/* <Button onPress={() => navigation.navigate('Details')} title="Open Details"/> */}
-        <Button onPress={() => FIREBASE_AUTH.signOut()} title="Logout"/>
       </View>
-    </View>
-  )
-}
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 20,
+  },
   profile: {
     flexDirection: 'row',
-    justifyContent: 'center',  // Centraliza horizontalmente
-    alignItems: 'center',      // Alinha na direção transversal (vertical)
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 24,
   },
   image: {
@@ -47,8 +48,8 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flexDirection: 'column',
-    marginLeft: 10,  // Adiciona espaçamento entre a imagem e o texto
-    alignItems: 'flex-start',  // Garante que o texto fique alinhado à esquerda
+    marginLeft: 10,
+    alignItems: 'flex-start',
   },
   text: {
     fontFamily: 'Poppins_500Medium',
@@ -64,6 +65,15 @@ const styles = StyleSheet.create({
     marginTop: 4,
     color: '#007AFF',
   },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 23,
+    padding: 48,
+    marginTop: 48,
+  },
 });
 
-export default List
+export default List;
