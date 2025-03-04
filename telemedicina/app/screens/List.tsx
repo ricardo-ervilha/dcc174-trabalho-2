@@ -25,7 +25,7 @@ const List = ({ navigation }: RouterProps) => {
       
       <View style={{flex: 1, flexDirection:'row', justifyContent: 'center', alignItems:'center', gap:23, padding:48, marginTop: 48}}>
         <CustomButtonArea onPress={() => navigation.navigate('Dúvidas')} imagepath={require('../../assets/communication.png')} text="Acessar Dúvidas"/>
-        <CustomButtonArea onPress={() => navigation.navigate('Dúvidas')} imagepath={require('../../assets/report.png')} text="Relatório de Estagiário" />                    
+        <CustomButtonArea onPress={() => navigation.navigate('Estagiarios')} imagepath={require('../../assets/report.png')} text="Relatório de Estagiário" />                    
         {/* <Button onPress={() => navigation.navigate('Dúvidas')} title="Open Details"/> */}
         {/* <Button onPress={() => navigation.navigate('Details')} title="Open Details"/> */}
         <Button onPress={() => FIREBASE_AUTH.signOut()} title="Logout"/>
