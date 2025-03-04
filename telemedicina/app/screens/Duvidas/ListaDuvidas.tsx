@@ -176,13 +176,13 @@ const ListaDuvidas = ({ navigation }: RouterProps) => {
                   <View style={styles.textContainer}>
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.description}>{item.description}</Text>
-                    <Text style={styles.author}>Enviado Por: {item.author}</Text>
+                    <Text style={styles.author}>Enviado Por: <span style={{fontFamily: 'Poppins_900Black'}}>{item.author}</span></Text>
                   </View>
                 </View>
                 <View style={{marginTop:20}}>
                   <TouchableOpacity>
                   <CustomButton text="Responder" onPress={() => {
-                        navigation.navigate('Responder Dúvida', 
+                        navigation.navigate('ResponderDuvida', 
                           {questionData: item})
                      }}
                     />
@@ -203,6 +203,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F5F5F5",
     padding: 10,
+    fontFamily: 'Poppins_500Medium',
   },
   cardCol:{
     backgroundColor: "white",
@@ -226,18 +227,19 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   title: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     color: "#000",
   },
   description: {
-    fontSize: 14,
+    fontSize: 16,
     color: "#606060",
     marginVertical: 5,
   },
   author: {
-    fontSize: 12,
+    fontSize: 14,
     color: "#808080",
+    fontWeight: "bold"
   },
   button: {
     backgroundColor: "#2B44BD",

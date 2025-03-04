@@ -18,6 +18,9 @@ import ListaDuvidas from './app/screens/Duvidas/ListaDuvidas';
 import { Image } from 'react-native';
 import ListarEstudantes from './app/screens/Estudantes/ListaEstudantes';
 import RelatorioEstudante from './app/screens/Estudantes/RelatorioEstudante';
+import FlashMessage from 'react-native-flash-message';
+import ConfirmExitModal from './app/components/ConfirmationModal';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -33,37 +36,51 @@ function InsideLayout() {
 
   return (
     <>
-      <InsideStack.Navigator
-        screenOptions={{
-          headerTitleAlign: 'center',
-          headerTintColor: '#ffffff',
-          contentStyle: { backgroundColor: '#ffffff' },
-          headerStyle: { backgroundColor: '#2B44BD' },
-          headerTitleStyle: {
-            fontFamily: 'Poppins_500Medium',
-            fontSize: 20,
-            fontWeight: 'bold',
-            color: '#FFFFFF',
-          },
-          headerLeft: () => (
-            <HamburgerMenu navigation={navigator} />
-          ),
-          headerRight: () => (
-            <View>
-              <TouchableOpacity onPress={() => setModalVisible(true)}>
-                <Image source={require('./assets/x.png')} style={{ width: 20, height: 20, marginRight: 10 }} />
-              </TouchableOpacity>
-            </View>
-          ),
-        }}
-      >
-        <InsideStack.Screen name="HOME" component={List} />
-        <InsideStack.Screen name="Details" component={Details} />
-        <InsideStack.Screen name="Dúvidas" component={ListaDuvidas} />
-        <InsideStack.Screen name="Responder Dúvida" component={DetalhesDuvida} />
-        <InsideStack.Screen name="Estagiarios" component={ListarEstudantes} />
-        <InsideStack.Screen name="Relatorio" component={RelatorioEstudante} />
-      </InsideStack.Navigator>
+    <InsideStack.Navigator
+          screenOptions={({ navigation, route }) => ({
+            headerTitleAlign: 'center',
+            headerTintColor: '#ffffff',
+            contentStyle: { backgroundColor: '#ffffff' },
+            headerStyle: { backgroundColor: '#2B44BD' },
+            headerTitleStyle: {
+              fontFamily: 'Poppins_500Medium',
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: '#FFFFFF',
+            },
+            headerLeft: () => (
+              route.name === 'HOME' ? (
+                <TouchableOpacity>
+                  <Image source={require('./assets/menu.png')} style={{ width: 25, height: 25, marginLeft: 5 }} />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                  <Image source={require('./assets/back.png')} style={{ width: 25, height: 25, marginLeft: 5 }} />
+                </TouchableOpacity>
+              )
+            ),
+            headerRight: () => (
+              route.name !== 'HOME' ? (
+                <TouchableOpacity onPress={() => navigation.navigate('HOME')}>
+                  <Image source={require('./assets/x.png')} style={{ width: 20, height: 20, marginRight: 10 }} />
+                </TouchableOpacity>
+              ):undefined
+            ),
+          })}
+>
+
+      <InsideStack.Screen name="Home" component={List} />
+      <InsideStack.Screen name="Details" component={Details}/>
+      <InsideStack.Screen name="Duvidas" component={ListaDuvidas}  options={{ title: 'Dúvidas' }}/>
+      <InsideStack.Screen name="ResponderDuvida" component={DetalhesDuvida} options={{ title: 'Responder Dúvida' }}/>
+    </InsideStack.Navigator>
+    <ConfirmExitModal
+        textModal="Tem certeza que deseja sair do aplicativo?"
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onConfirm={handleConfirmExit}
+      />
+      <FlashMessage position="top" />
     </>
   );
 }
@@ -87,12 +104,10 @@ export default function App() {
   } else {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          {user ? (
-            <Stack.Screen name="Home" component={InsideLayout} options={{ headerShown: false }} />
-          ) : (
-            <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-          )}
+        <Stack.Navigator initialRouteName='Login'>
+          {user ? 
+          (<Stack.Screen name='Login' component={InsideLayout} options={{ headerShown: false }}/>) : 
+          (<Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>)}
         </Stack.Navigator>
       </NavigationContainer>
     );

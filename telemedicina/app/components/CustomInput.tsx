@@ -3,7 +3,7 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
-const CustomInput = ({ value, onChangeText, placeholder, style, secureTextEntry, keyboardType }) => {
+const CustomInput = ({ value, onChangeText, placeholder, style, secureTextEntry=false, keyboardType="default" }) => {
   return (
     <View style={styles.container}>
       <TextInput

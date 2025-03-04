@@ -1,16 +1,24 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Button } from 'react-native-paper';
 
 export default class CustomButton extends React.Component { 
     render() { 
         const { backgroundColor, onPress, text } = this.props;
-        const buttonBackgroundColor = backgroundColor || '#5996D8'; // Caso não passe background, usa o padrão
+        const buttonBackgroundColor = backgroundColor || '#5996D8'; // Cor padrão se não for passada
 
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={[styles.button, { backgroundColor: buttonBackgroundColor }]} onPress={onPress}>
-                    <Text style={styles.text}>{text}</Text>
-                </TouchableOpacity>
+                <Button 
+                    mode="contained" 
+                    onPress={onPress} 
+                    buttonColor={buttonBackgroundColor}
+                    textColor="#FFFFFF"
+                    style={styles.button}
+                    labelStyle={styles.text}
+                >
+                    {text}
+                </Button>
             </View>
         );
     }
@@ -18,22 +26,14 @@ export default class CustomButton extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     marginBottom: 5,
   },
   button: {
-    alignItems: 'center',
-    padding: 10,
     borderRadius: 6,
   },
   text: {
-    color: "#FFFFFF",
     fontFamily: 'Poppins_800ExtraBold',
     fontSize: 16,
-  },
-  countContainer: {
-    alignItems: 'center',
-    padding: 10,
   },
 });
