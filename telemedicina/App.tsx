@@ -54,8 +54,6 @@ function InsideLayout({ navigation }: any) {
   return (
     <>
       {/* Adicionando o menu hambúrguer */}
-      <HamburgerMenu navigation={navigation} />
-
       <InsideStack.Navigator
         screenOptions={({ navigation, route }) => ({
           headerTitleAlign: 'center',
@@ -69,11 +67,20 @@ function InsideLayout({ navigation }: any) {
             color: '#FFFFFF',
           },
           headerRight: () =>
-            route.name !== 'HOME' ? (
-              <TouchableOpacity onPress={() => navigation.navigate('HOME')}>
+            route.name !== 'Home' ? (
+              <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                 <Image source={require('./assets/x.png')} style={{ width: 20, height: 20, marginRight: 10, tintColor: 'white' }} />
               </TouchableOpacity>
             ) : undefined,
+          
+          headerLeft: () => 
+            route.name === 'Home' ? (
+              <HamburgerMenu navigation={navigation} />
+            ) : (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Image source={require('./assets/back.png')} style={{ width: 25, height: 25, marginLeft: 5 }} />
+              </TouchableOpacity>
+            ),
         })}
       >
         <InsideStack.Screen name="Home" component={List} />
