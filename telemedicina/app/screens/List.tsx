@@ -31,9 +31,10 @@ const List = ({ navigation }: RouterProps) => {
       </View>
       
       <View style={styles.buttonContainer}>
+        <CustomButtonArea badgeCount='0' onPress={() => navigation.navigate('Cadastrar Dúvida')} imagepath={require('../../assets/decision-making.png')} text="Cadastrar Dúvida"/>
         <CustomButtonArea badgeCount='3' onPress={() => navigation.navigate('Duvidas')} imagepath={require('../../assets/communication.png')} text="Acessar Dúvidas"/>
         <CustomButtonArea badgeCount='0' onPress={() => navigation.navigate('Estagiarios')} imagepath={require('../../assets/report.png')} text="Gerar Relatório de Estagiário" />                    
-        <CustomButtonArea badgeCount='0' onPress={() => navigation.navigate('Relatorio')} imagepath={require('../../assets/overview.png')} text="Visualizar Relatórios" />                    
+        <CustomButtonArea badgeCount='1' onPress={() => navigation.navigate('Relatorio')} imagepath={require('../../assets/overview.png')} text="Visualizar Relatórios" />                    
         {/* <Button onPress={() => navigation.navigate('Duvidas')} title="Open Details"/> */}
         {/* <Button onPress={() => navigation.navigate('Details')} title="Open Details"/> */}
       </View>

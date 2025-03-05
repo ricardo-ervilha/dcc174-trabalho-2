@@ -39,6 +39,7 @@ import ListarEstudantes from './app/screens/Estudantes/ListaEstudantes';
 import RelatorioEstudante from './app/screens/Estudantes/RelatorioEstudante';
 import FlashMessage from 'react-native-flash-message';
 import ConfirmExitModal from './app/components/ConfirmationModal';
+import CadastrarDuvida from './app/screens/CadastrarDuvida';
 
 const Stack = createNativeStackNavigator();
 const InsideStack = createNativeStackNavigator();
@@ -82,6 +83,8 @@ function InsideLayout({ navigation }: any) {
         <InsideStack.Screen name="ResponderDuvida" component={DetalhesDuvida} options={{ title: 'Responder Dúvida' }} />
         <InsideStack.Screen name="Estagiarios" component={ListarEstudantes} />
         <InsideStack.Screen name="Relatorio" component={RelatorioEstudante} />
+        <InsideStack.Screen name="Cadastrar Dúvida" component={CadastrarDuvida} />
+
       </InsideStack.Navigator>
 
       <ConfirmExitModal
