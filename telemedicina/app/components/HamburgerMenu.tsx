@@ -50,10 +50,26 @@ const HamburgerMenu = ({ navigation }: any) => {
         pointerEvents={menuVisible ? 'auto' : 'none'} // Desativa interações quando o menu estiver fechado
       >
         <View style={styles.menuContent}>
-          <TouchableOpacity style={styles.menuItemContainer} onPress={() => navigation.navigate('Home')}>
-            <Image source={require('../../assets/resume.png')} style={styles.closeIcon} />
-            <Text style={styles.menuItem}>Atualizar Perfil</Text>
+          <TouchableOpacity style={styles.menuItemContainer} onPress={() => navigation.navigate('Cadastrar Dúvida')}>
+            <Image source={require('../../assets/decision-making.png')} style={styles.closeIcon} />
+            <Text style={styles.menuItem}>Cadastrar Dúvida</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity style={styles.menuItemContainer} onPress={() => navigation.navigate('Duvidas')}>
+            <Image source={require('../../assets/communication.png')} style={styles.closeIcon} />
+            <Text style={styles.menuItem}>Acessar Dúvidas</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.menuItemContainer} onPress={() => navigation.navigate('Estagiarios')}>
+            <Image source={require('../../assets/report.png')} style={styles.closeIcon} />
+            <Text style={styles.menuItem}>Gerar Relatório de Estagiário</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.menuItemContainer} onPress={() => navigation.navigate('Relatorio')}>
+            <Image source={require('../../assets/overview.png')} style={styles.closeIcon} />
+            <Text style={styles.menuItem}>Visualizar Relatórios</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity style={styles.menuItemContainer}  onPress={() => setModalVisible(true)}>
             <Image source={require('../../assets/logout.png')} style={styles.closeIcon} />
             <Text style={styles.menuItem}>Logout</Text>
