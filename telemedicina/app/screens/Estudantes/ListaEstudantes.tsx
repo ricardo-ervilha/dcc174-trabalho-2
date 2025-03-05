@@ -12,11 +12,11 @@ import CustomButton from "../../components/CustomButton";
 import { NavigationProp } from '@react-navigation/native'
 
 const students = [
-  { id: "1", name: "Ana Souza", avatar: "student_female.png" },
-  { id: "2", name: "Carlos Mendes", avatar: "student_male.png" },
-  { id: "3", name: "Fernanda Lima", avatar: "student_female.png" },
-  { id: "4", name: "Ricardo Alves", avatar: "student_male.png" },
-  { id: "5", name: "Beatriz Rocha", avatar: "student_female.png" },
+  { id: "1", name: "Ana Souza", avatar: "student_female.png" , year: 2018},
+  { id: "2", name: "Carlos Mendes", avatar: "student_male.png" , year: 2021},
+  { id: "3", name: "Fernanda Lima", avatar: "student_female.png" , year: 2025},
+  { id: "4", name: "Ricardo Alves", avatar: "student_male.png" , year: 2015},
+  { id: "5", name: "Beatriz Rocha", avatar: "student_female.png" , year: 2009},
 ];
 
 const iconMap = {

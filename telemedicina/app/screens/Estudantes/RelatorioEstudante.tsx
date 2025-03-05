@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import CustomButton from "../../components/CustomButton";
 import CustomInput from "../../components/CustomInput";
 
+import LargeTextInput from "../../components/TextArea";
+
 const RelatorioEstudante = ({ route, navigation }) => {
   const { studentData } = route.params || { studentData: null };
 
@@ -23,18 +25,18 @@ const RelatorioEstudante = ({ route, navigation }) => {
       </View>
 
       <View style={styles.detailBox}>
-        <Text style={styles.detailText}>Curso: {studentData.course}</Text>
-        <Text style={styles.detailText}>Ano: {studentData.year}</Text>
+        {/* <Text style={styles.detailText}>Curso: {studentData.course}</Text> */}
+        <Text style={styles.detailText}>Período de Ingresso: {studentData.year}</Text>
       </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Avaliação</Text>
-        <CustomInput value={avaliacao} onChangeText={setAvaliacao} placeholder="Escreva a avaliação..." />
+        <LargeTextInput value={avaliacao} onChangeText={setAvaliacao} placeholder="Escreva a avaliação..." />
       </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Desempenho Técnico-Científico</Text>
-        <CustomInput value={desempenho} onChangeText={setDesempenho} placeholder="Escreva sobre o desempenho..." />
+        <LargeTextInput value={desempenho} onChangeText={setDesempenho} placeholder="Escreva sobre o desempenho..." />
       </View>
 
       <View style={styles.buttonContainer}>

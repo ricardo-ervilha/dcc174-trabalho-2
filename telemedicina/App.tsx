@@ -8,8 +8,27 @@ import { FIREBASE_AUTH } from './FirebaseConfig';
 import AppLoading from 'expo-app-loading';
 import Login from './app/screens/Login';
 import HamburgerMenu from './app/components/HamburgerMenu'; // Importando o menu deslizante
-import { Poppins_500Medium } from '@expo-google-fonts/poppins';
-import { useFonts } from 'expo-font';
+import {
+  useFonts,
+  Poppins_100Thin,
+  Poppins_100Thin_Italic,
+  Poppins_200ExtraLight,
+  Poppins_200ExtraLight_Italic,
+  Poppins_300Light,
+  Poppins_300Light_Italic,
+  Poppins_400Regular,
+  Poppins_400Regular_Italic,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
+  Poppins_600SemiBold,
+  Poppins_600SemiBold_Italic,
+  Poppins_700Bold,
+  Poppins_700Bold_Italic,
+  Poppins_800ExtraBold,
+  Poppins_800ExtraBold_Italic,
+  Poppins_900Black,
+  Poppins_900Black_Italic,
+} from '@expo-google-fonts/poppins';
 import { View, TouchableOpacity } from 'react-native';
 import List from './app/screens/List';
 import Details from './app/screens/Details';
@@ -52,7 +71,7 @@ function InsideLayout({ navigation }: any) {
           headerRight: () =>
             route.name !== 'HOME' ? (
               <TouchableOpacity onPress={() => navigation.navigate('HOME')}>
-                <Image source={require('./assets/x.png')} style={{ width: 20, height: 20, marginRight: 10 }} />
+                <Image source={require('./assets/x.png')} style={{ width: 20, height: 20, marginRight: 10, tintColor: 'white' }} />
               </TouchableOpacity>
             ) : undefined,
         })}
@@ -88,7 +107,24 @@ export default function App() {
   }, []);
 
   let [fontsLoaded] = useFonts({
+    Poppins_100Thin,
+    Poppins_100Thin_Italic,
+    Poppins_200ExtraLight,
+    Poppins_200ExtraLight_Italic,
+    Poppins_300Light,
+    Poppins_300Light_Italic,
+    Poppins_400Regular,
+    Poppins_400Regular_Italic,
     Poppins_500Medium,
+    Poppins_500Medium_Italic,
+    Poppins_600SemiBold,
+    Poppins_600SemiBold_Italic,
+    Poppins_700Bold,
+    Poppins_700Bold_Italic,
+    Poppins_800ExtraBold,
+    Poppins_800ExtraBold_Italic,
+    Poppins_900Black,
+    Poppins_900Black_Italic,
   });
 
   if (!fontsLoaded) {

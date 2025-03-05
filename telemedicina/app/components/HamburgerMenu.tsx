@@ -41,11 +41,13 @@ const HamburgerMenu = ({ navigation }: any) => {
         pointerEvents={menuVisible ? 'auto' : 'none'} // Desativa interações quando o menu estiver fechado
       >
         <View style={styles.menuContent}>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <Text style={styles.menuItem}>Home</Text>
+          <TouchableOpacity style={styles.menuItemContainer} onPress={() => navigation.navigate('Home')}>
+            <Image source={require('../../assets/resume.png')} style={styles.closeIcon} />
+            <Text style={styles.menuItem}>Atualizar Perfil</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Details')}>
-            <Text style={styles.menuItem}>Details</Text>
+          <TouchableOpacity style={styles.menuItemContainer}  onPress={() => navigation.navigate('Details')}>
+            <Image source={require('../../assets/logout.png')} style={styles.closeIcon} />
+            <Text style={styles.menuItem}>Logout</Text>
           </TouchableOpacity>
         </View>
 
@@ -61,6 +63,11 @@ const HamburgerMenu = ({ navigation }: any) => {
 };
 
 const styles = StyleSheet.create({
+  menuItemContainer: {
+    flexDirection: 'row', // Alinha os itens na horizontal
+    alignItems: 'flex-start', // Alinha verticalmente no centro
+    padding: 10, // Espaçamento interno
+  },
   menuButton: {
     position: 'absolute',
     top: 20,
@@ -91,8 +98,11 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     color: '#fff',
-    fontSize: 18,
+    // fontSize: 18,
     marginBottom: 20,
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 16, 
+    // color: '#333',
   },
   closeButton: {
     position: 'absolute',
@@ -100,9 +110,12 @@ const styles = StyleSheet.create({
     right: 20,
   },
   closeIcon: {
-    width: 30,
-    height: 30,
+    // width: 30,
+    // height: 30,
     tintColor: '#ffffff',
+    width: 20, 
+    height: 20, 
+    marginRight: 10
   },
   overlay: {
     position: 'absolute',
