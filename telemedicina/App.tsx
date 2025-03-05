@@ -53,7 +53,6 @@ function InsideLayout({ navigation }: any) {
 
   return (
     <>
-      {/* Adicionando o menu hambúrguer */}
       <InsideStack.Navigator
         screenOptions={({ navigation, route }) => ({
           headerTitleAlign: 'center',
@@ -83,7 +82,7 @@ function InsideLayout({ navigation }: any) {
             ),
         })}
       >
-        <InsideStack.Screen name="Home" component={List} />
+        <InsideStack.Screen name="Home" component={List} options={{ title: '' }} />
         <InsideStack.Screen name="Details" component={Details} />
         <InsideStack.Screen name="Duvidas" component={ListaDuvidas} options={{ title: 'Dúvidas' }} />
         <InsideStack.Screen name="ResponderDuvida" component={DetalhesDuvida} options={{ title: 'Responder Dúvida' }} />
