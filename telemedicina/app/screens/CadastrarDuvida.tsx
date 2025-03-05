@@ -1,10 +1,11 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet,ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import LargeTextInput from '../components/TextArea'
 
 import CustomButton from '../components/CustomButton'
 import CustomInput from '../components/CustomInput'
 import RNPickerSelect from 'react-native-picker-select';
+import { SelectList } from 'react-native-dropdown-select-list'
 
 const CadastrarDuvida = ({ route, navigation }) => {
    const [nome, setNome] = useState('');
@@ -12,7 +13,17 @@ const CadastrarDuvida = ({ route, navigation }) => {
    const [altura, setAltura] = useState('');
    const [peso, setPeso] = useState('');
    const [resposta, setResposta] = useState(''); 
+   const [selected, setSelected] = React.useState("");
+  
+  const dataSexo = [
+      {key:'1', value:'Masculino'},
+      {key:'2', value:'Feminino'},
+      {key:'2', value:'Outro'},
+     
+  ]
+
    return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
           {/* Cabeçalho */}
           <View style={styles.header}>
@@ -27,7 +38,7 @@ const CadastrarDuvida = ({ route, navigation }) => {
           <CustomInput value={nome} placeholder='Nome' autoCapitalize='none' onChangeText={setNome} />
           <CustomInput value={idade} placeholder='Idade (anos)' autoCapitalize='none' onChangeText={setIdade} />
           <View style={{marginVertical: 5, marginBottom: 20}}>
-              <RNPickerSelect
+              {/* <RNPickerSelect
                     placeholder={{ label: "Gênero", value: null }} // Certifique-se de que value é null
                     onValueChange={(value) => console.log(value)}
                     items={[
@@ -36,12 +47,19 @@ const CadastrarDuvida = ({ route, navigation }) => {
                         { label: "Outro", value: "outro" },
                     ]}
                     style={pickerSelectStyles} // Aplicando o estilo
+                /> */}
+                <SelectList 
+                  placeholder="Gênero"
+                  search={false} 
+                  setSelected={(val: string) => setSelected(val)} 
+                  data={dataSexo} 
+                  save="value"
                 />
           </View>
             <CustomInput value={altura} placeholder='Altura (cm)' autoCapitalize='none' onChangeText={setAltura} />
             <CustomInput value={peso} placeholder='Peso (Kg)' autoCapitalize='none' onChangeText={setPeso} />
             <View style={{marginVertical: 5}}>
-                <RNPickerSelect
+                {/* <RNPickerSelect
                     placeholder={{ label: "Nível de Atividade", value: null }} // Certifique-se de que value é null
                     onValueChange={(value) => console.log(value)}
                     items={[
@@ -49,24 +67,35 @@ const CadastrarDuvida = ({ route, navigation }) => {
                         { label: "De vez em quando", value: "feminino" },
                         { label: "Nunca", value: "outro" },
                     ]} // Aplicando o estilo
+                /> */}
+
+
+<SelectList 
+                  placeholder="Nível de Atividade"
+                  search={false} 
+                  setSelected={(val: string) => setSelected(val)} 
+                  data={[
+                    { key: "1", value: "Frequentemente" },
+                    { key: "2", value: "De vez em quando" },
+                    { key: "3", value: "Nunca" },
+                ]}
+                  save="value"
                 />
+
             </View>
             <View style={{marginVertical: 5}}>
-            <RNPickerSelect
-                placeholder={{ label: "Fumante", value: null }} 
-                onValueChange={(value) => console.log(value)}
-                items={[
-                    { label: "Sim", value: "sim" },
-                    { label: "Não", value: "nao" },
-                ]}
-                style={{
-                    ...pickerSelectStyles, // Aplica os estilos corretamente
-                    inputIOS: { ...pickerSelectStyles.inputIOS },
-                    inputAndroid: { ...pickerSelectStyles.inputAndroid },
-                }}
-                useNativeAndroidPickerStyle={false} // Necessário para aplicar os estilos no Android
-            />
 
+              
+            <SelectList 
+                  placeholder="Fumante"
+                  search={false} 
+                  setSelected={(val: string) => setSelected(val)} 
+                  data={[
+                    { key: "1", value: "Sim" },
+                    { key: "2", value: "Não" },
+                ]}
+                  save="value"
+                />
             </View>
 
             <label style={{marginTop: 10}} htmlFor="">Sintomas do Paciente</label>
@@ -78,7 +107,7 @@ const CadastrarDuvida = ({ route, navigation }) => {
                   />
 
             <View style={{marginVertical: 5}}>
-            <RNPickerSelect
+            {/* <RNPickerSelect
                 placeholder={{ label: "Especialidade", value: null }} 
                 onValueChange={(value) => console.log(value)}
                 items={[
@@ -103,8 +132,30 @@ const CadastrarDuvida = ({ route, navigation }) => {
                     inputAndroid: { ...pickerSelectStyles.inputAndroid },
                 }}
                 useNativeAndroidPickerStyle={false} // Necessário para aplicar os estilos no Android
-            />
+            /> */}
 
+              <SelectList 
+                  placeholder="Especialidade"
+                  search={false} 
+                  setSelected={(val: string) => setSelected(val)} 
+                  data={[
+                    { key: '1', value: 'ortopedia' },
+                    { key: '2', value: 'cardiologia' },
+                    { key: '3', value: 'dermatologia' },
+                    { key: '4', value: 'endocrinologia' },
+                    { key: '5', value: 'gastroenterologia' },
+                    { key: '6', value: 'geriatria' },
+                    { key: '7', value: 'ginecologia' },
+                    { key: '8', value: 'neurologia' },
+                    { key: '9', value: 'oftalmologia' },
+                    { key: '10', value: 'otorrinolaringologia' },
+                    { key: '11', value: 'pediatria' },
+                    { key: '12', value: 'psiquiatria' },
+                    { key: '13', value: 'reumatologia' },
+                    { key: '14', value: 'urologia' }
+                ]}
+                  save="value"
+                />
             </View>
           </View>
     
@@ -127,6 +178,7 @@ const CadastrarDuvida = ({ route, navigation }) => {
                 />
             </View>
         </View>
+        </ScrollView>
   )
 }
 
@@ -155,6 +207,11 @@ const pickerSelectStyles = StyleSheet.create({
 });
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
     backgroundColor: "#ffffff",
     borderRadius: 12,
