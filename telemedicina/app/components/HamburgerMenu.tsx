@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row', // Alinha os itens na horizontal
     alignItems: 'flex-start', // Alinha verticalmente no centro
     padding: 10, // Espaçamento interno
+    backgroundColor: '#2B44BD'
   },
   menuButton: {
     position: 'absolute',
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     width: width / 2, // Menu ocupa metade da largura da tela
-    height: '100%', // Garante que o menu cubra toda a altura da tela
+    height: '1500%', // Garante que o menu cubra toda a altura da tela
     backgroundColor: '#2B44BD', // Fundo azul total
     zIndex: 9999,
   },
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'stretch', // Garante que os itens ocupem toda a largura do menu
     paddingTop: 100,
-    paddingHorizontal: 20,
+    padding: 20,
     backgroundColor: '#2B44BD', // Certifica que tudo dentro do menu seja azul
   },
   menuItem: {
@@ -103,6 +104,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins_600SemiBold',
     fontSize: 16, 
     // color: '#333',
+    backgroundColor: '#2B44BD',
   },
   closeButton: {
     position: 'absolute',
