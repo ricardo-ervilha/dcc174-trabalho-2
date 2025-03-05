@@ -21,6 +21,7 @@ const RelatorioEstudante = ({ route, navigation }) => {
         <Image source={require("../../../assets/student_icon.png")} style={styles.icon} />
         <View style={styles.headerText}>
           <Text style={styles.title}>{studentData.name}</Text>
+          <Text style={styles.matricula}>{studentData.matricula}</Text>
         </View>
       </View>
 
@@ -81,6 +82,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: "#ffffff",
+  },
+  matricula : {
+    fontSize: 12,
+    color: "#ffffff"
   },
   detailBox: {
     backgroundColor: "#F5F5F5",
