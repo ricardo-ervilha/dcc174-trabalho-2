@@ -1,10 +1,25 @@
-# dcc174-trabalho-2
+# DCC174 (Interação Humano-Computador) - Trabalho 2 (Protótipo de Alta Fidelidade) - 2024.3
 
-Trabalho da Disciplina de Interação Humano-Computador (DCC174) no período 2024.3.
+<hr>
 
-- Instale o node.js e o npm nas versões mais recentes
-- cd app-telemedicina
-- npm install
-- npx expo start
-- acesse o site do firebase usando a conta do batatinha
+# Alunos
+Lucas Silva Santana
+Ricardo Ervilha Silva
+Yan Messias de Azevedo Fonseca
 
+<hr>
+
+# Professor
+André Luiz de Oliveira
+
+<hr>
+
+Aplicativo de apoio a Telemedicina desenvolvido com React Native. Para executá-lo:
+
+- Instale o Node.js e o npm nas suas versões mais recentes;
+
+```bash
+cd app-telemedicina
+npm install
+npx expo start
+```
