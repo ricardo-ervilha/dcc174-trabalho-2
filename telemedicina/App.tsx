@@ -93,12 +93,6 @@ function InsideLayout({ navigation }: any) {
 
       </InsideStack.Navigator>
 
-      <ConfirmExitModal
-        textModal="Tem certeza que deseja sair do aplicativo?"
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        onConfirm={handleConfirmExit}
-      />
       <FlashMessage position="top" />
     </>
   );

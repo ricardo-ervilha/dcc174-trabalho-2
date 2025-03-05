@@ -2,18 +2,27 @@ import React, { useState } from 'react';
 import { 
   View, Text, TouchableOpacity, Animated, Dimensions, Image, StyleSheet, TouchableWithoutFeedback 
 } from 'react-native';
+import ConfirmExitModal from './ConfirmationModal';
+import { FIREBASE_AUTH } from '../../FirebaseConfig';
 
 const { width, height } = Dimensions.get('window');
 
 const HamburgerMenu = ({ navigation }: any) => {
   const [menuVisible, setMenuVisible] = useState(false);
-  const translateX = useState(new Animated.Value(-width / 2))[0]; // Posição inicial do menu (fora da tela)
+  const translateX = useState(new Animated.Value(-width))[0]; // Posição inicial do menu (fora da tela)
+
+  const [modalVisible, setModalVisible] = useState(false);
+  
+  const handleConfirmExit = () => {
+    setModalVisible(false);
+    FIREBASE_AUTH.signOut();
+  };
 
   const toggleMenu = () => {
     const newMenuVisible = !menuVisible;
     setMenuVisible(newMenuVisible);
     Animated.timing(translateX, {
-      toValue: newMenuVisible ? 0 : -width / 2, // Move o menu para dentro ou para fora da tela
+      toValue: newMenuVisible ? 0 : -width, // Move o menu para dentro ou para fora da tela
       duration: 300,
       useNativeDriver: true,
     }).start();
@@ -45,10 +54,16 @@ const HamburgerMenu = ({ navigation }: any) => {
             <Image source={require('../../assets/resume.png')} style={styles.closeIcon} />
             <Text style={styles.menuItem}>Atualizar Perfil</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItemContainer}  onPress={() => navigation.navigate('Details')}>
+          <TouchableOpacity style={styles.menuItemContainer}  onPress={() => setModalVisible(true)}>
             <Image source={require('../../assets/logout.png')} style={styles.closeIcon} />
             <Text style={styles.menuItem}>Logout</Text>
           </TouchableOpacity>
+          <ConfirmExitModal
+            textModal="Tem certeza que deseja sair do aplicativo?"
+            visible={modalVisible}
+            onClose={() => setModalVisible(false)}
+            onConfirm={handleConfirmExit}
+          />
         </View>
 
         {/* Ícone para fechar o menu */}
@@ -84,7 +99,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    width: width / 2, // Menu ocupa metade da largura da tela
+    width: width, // Menu ocupa metade da largura da tela
     height: '1500%', // Garante que o menu cubra toda a altura da tela
     backgroundColor: '#2B44BD', // Fundo azul total
     zIndex: 9999,
