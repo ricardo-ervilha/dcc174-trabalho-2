@@ -12,11 +12,11 @@ import CustomButton from "../../components/CustomButton";
 import { NavigationProp } from '@react-navigation/native'
 
 const students = [
-  { id: "1", name: "Ana Souza", avatar: "student_female.png" , year: 2018},
-  { id: "2", name: "Carlos Mendes", avatar: "student_male.png" , year: 2021},
-  { id: "3", name: "Fernanda Lima", avatar: "student_female.png" , year: 2025},
-  { id: "4", name: "Ricardo Alves", avatar: "student_male.png" , year: 2015},
-  { id: "5", name: "Beatriz Rocha", avatar: "student_female.png" , year: 2009},
+  { id: "1", name: "Ana Souza", avatar: "student_female.png" , year: 2018, matricula:'202148932'},
+  { id: "2", name: "Carlos Mendes", avatar: "student_male.png" , year: 2021, matricula:'202048832'},
+  { id: "3", name: "Fernanda Lima", avatar: "student_female.png" , year: 2025, matricula:'202348732'},
+  { id: "4", name: "Ricardo Alves", avatar: "student_male.png" , year: 2015, matricula:'202248952'},
+  { id: "5", name: "Beatriz Rocha", avatar: "student_female.png" , year: 2009, matricula:'201948902'},
 ];
 
 const iconMap = {
@@ -32,7 +32,7 @@ const ListarEstudantes = ({ navigation }: RouterProps) => {
   const [search, setSearch] = useState("");
 
   const filteredStudents = students.filter((s) =>
-    s.name.toLowerCase().includes(search.toLowerCase())
+    s.matricula.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -53,6 +53,7 @@ const ListarEstudantes = ({ navigation }: RouterProps) => {
               <Image source={iconMap[item.avatar]} style={styles.image} />
               <View style={styles.textContainer}>
                 <Text style={styles.name}>{item.name}</Text>
+                <Text style={styles.matricula}>{item.matricula}</Text>
               </View>
             </View>
             <View style={{ marginTop: 20 }}>
@@ -98,6 +99,10 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: "bold",
+    color: "#000",
+  },
+  matricula: {
+    fontSize: 12,
     color: "#000",
   },
 });
